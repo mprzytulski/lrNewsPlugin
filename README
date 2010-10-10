@@ -17,10 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 1. Installation
 ===============
-Copy all files and folders under your plugins directory and run `symfony dm:setup`.
-Either subscribe yourself to the newsletter and send a test newsletter so mail templates are created
-automatically by Diem or create templates yourself and use exact same names as stated below.
-
+See http://diem-project.org/plugins/lrnewsplugin
 
 2. Templates
 ============
