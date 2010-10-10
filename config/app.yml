@@ -1,0 +1,6 @@
+all:
+  news:
+    showAuthor:             false
+    maxFeedItems:           20
+    feedAuthor:             lrNewsPlugin
+    wait4ConfirmationHours: 48

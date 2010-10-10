@@ -1,0 +1,40 @@
+generator:
+  class: dmAdminDoctrineGenerator
+  param:
+    model_class: LrSubscriber
+    theme: dmAdmin
+    non_verbose_templates: true
+    with_show: false
+    route_prefix: lr_subscriber
+    with_doctrine_route: false
+    config:
+      actions: ~
+      fields: {  }
+      list:
+        display:
+          - =lastname
+          - firstname
+          - email
+          - confirmed
+          - created_at
+          - updated_at
+        sort:
+          - id
+          - asc
+        table_method: getAdminListQuery
+        table_count_method: ~
+        sortable: false
+      filter:
+        display:
+          - firstname
+          - lastname
+          - email
+          - created_at
+          - updated_at
+      form:
+        display:
+          Others: [firstname, lastname, email, confirmed]
+        class: LrSubscriberAdminForm
+        fields: {  }
+      edit: ~
+      new: ~

@@ -1,0 +1,41 @@
+generator:
+  class: dmAdminDoctrineGenerator
+  param:
+    model_class: LrNewsletter
+    theme: dmAdmin
+    non_verbose_templates: true
+    with_show: false
+    route_prefix: lr_newsletter
+    with_doctrine_route: false
+    config:
+      actions: ~
+      fields: { }
+      list:
+        display:
+          - '=subject'
+          - sent_at
+          - created_at
+          - updated_at
+        sort:
+          - subject
+          - asc
+        table_method: getAdminListQuery
+        table_count_method: ~
+        sortable: false
+        object_actions:
+          send:     { credentials: ~ }
+        loremize: false
+      filter:
+        display:
+          - subject
+          - is_sent
+          - sent_at
+          - created_at
+          - updated_at
+      form:
+        display:
+          NONE: [subject, lr_articles_list]
+        class: LrNewsletterAdminForm
+        fields: {  }
+      edit: ~
+      new: ~

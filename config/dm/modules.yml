@@ -1,0 +1,18 @@
+Content:
+
+  News:
+    LrArticle:
+      name:         Articles
+      page:         true
+      components:
+        list:
+        listSide:
+        show:
+
+    LrNewsletter:
+      name:         Newsletters
+
+    LrSubscriber:
+      name:         Subscribers
+      components:
+        form:       { name: "Subscription" }

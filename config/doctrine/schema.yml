@@ -1,0 +1,46 @@
+LrArticle:
+  actAs:
+    DmSortable:
+    I18n:
+      fields:             [ title, summary, body, is_active ]
+      actAs:
+        Timestampable:
+  columns:
+    title:                { type: string(120), notnull: true }
+    summary:              { type: string(2000), notnull: true }
+    body:                 { type: clob, extra: markdown }
+    image:                { type: integer }
+    author:               { type: integer, notnull: true }
+    newsletter:           { type: integer }
+    is_active:            { type: boolean, notnull: true, default: false }
+  relations:
+    Image:
+      class:              DmMedia
+      local:              image
+      foreignAlias:       LrArticles
+    Author:
+      class:              DmUser
+      local:              author
+      foreignAlias:       LrArticles
+    Newsletter:
+      class:              LrNewsletter
+      local:              newsletter
+      foreignAlias:       LrArticles
+
+LrNewsletter:
+  actAs:
+    I18n:
+      fields:             [ subject ]
+      actAs:              Timestampable
+  columns:
+    subject:              { type: string(120), notnull: true }
+    sent_at:              { type: timestamp }
+
+LrSubscriber:
+  actAs:
+    Timestampable:
+  columns:
+    firstname:            { type: string(120), notnull: true }
+    lastname:             { type: string(120), notnull: true }
+    email:                { type: string(255), notnull: true, unique: true }
+    confirmed:            { type: boolean, notnull: true, default: false }
