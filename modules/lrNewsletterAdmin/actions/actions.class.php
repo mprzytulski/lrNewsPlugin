@@ -14,8 +14,11 @@ require_once dirname(__FILE__) . '/../lib/lrNewsletterAdminGeneratorHelper.class
 class lrNewsletterAdminActions extends autoLrNewsletterAdminActions {
 
     public function executeSend(sfWebRequest $request) {
-        $content = null;
+        $contentHtml = null;
+        $contentText = null;
+
         $this->subscriberCount = 0;
+
         $this->articles = array();
 
         $newsletter = LrNewsletterTable::getInstance()->findOneById($request->getParameter('id'));
@@ -27,7 +30,9 @@ class lrNewsletterAdminActions extends autoLrNewsletterAdminActions {
 
         foreach ($newsletter->LrArticles->getData() as $article) {
             $this->articles[] = $article->title;
-            $content .= $this->renderArticle($article->title, $article->summary);
+            $page = $article->getPage();
+            $contentHtml .= $this->renderArticle($article->title, $article->summary, $page);
+            $contentText .= $this->renderArticle($article->title, $article->summary, $page, false);
         }
 
         $mail = $this->getService('mail')->setTemplate('newsletter');
@@ -38,7 +43,8 @@ class lrNewsletterAdminActions extends autoLrNewsletterAdminActions {
                 'firstname' => $subscriber->firstname,
                 'lastname' => $subscriber->lastname,
                 'email' => $subscriber->email,
-                'content' => $content,
+                'content_text' => $contentText,
+                'content_html' => $contentHtml,
                 'unsubscribe_parameter' => '?remove=' . $subscriber->id,
                 'edit_parameter' => '?edit=' . $subscriber->id
             ));
@@ -56,13 +62,23 @@ class lrNewsletterAdminActions extends autoLrNewsletterAdminActions {
         $newsletter->save();
     }
 
-    protected function renderArticle($title, $summary) {
-        $nl = "\r\n";
+    protected function renderArticle($title, $summary, Doctrine_Record $page, $isHtml = true) {
+        if ($isHtml) {
+            $nl = "<br />";
+            
+            $title = '<p><h2>' . $title . '</h2>' . $nl;
+            $content = $summary . $nl . $nl;
+            $articleUrl = dm::getHelper()->link($page)->text(dm::getI18n()->__('Read more')) . '</p><hr />' . $nl;
+        } else {
+            $nl = "\r\n";
+            $sep = '-------------------------------------------------';
 
-        $title = "*== " . $title . "==*" . $nl;
-        $content = $summary . $nl . $nl;
+            $title = "*== " . $title . "==*" . $nl;
+            $content = $summary . $nl . $nl;
+            $articleUrl = dm::getHelper()->link($page)->getAbsoluteHref() . $nl . $sep . $nl . $nl;
+        }
 
-        return $title . $content;
+        return $title . $content . $articleUrl;
     }
 
 }
