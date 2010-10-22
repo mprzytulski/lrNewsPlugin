@@ -24,18 +24,18 @@ See http://diem-project.org/plugins/lrnewsplugin
 There are 2 mail templates used in this plugin:
 
 'confirm_newsletter_subscription' with the following variables:
-%firstname% => firstname of the subscriber
-%lastname% => lastname of the subscriber
-%email% => email address of the subscriber
-%confirm_parameter% => the parameter for confirmation link (See '3. Parameters' for more details.)
-%confirm_limit% => hours a subscription must be confirmed before subscriber gets deleted from database
+- %firstname% => firstname of the subscriber
+- %lastname% => lastname of the subscriber
+- %email% => email address of the subscriber
+- %confirm_parameter% => the parameter for confirmation link (See '3. Parameters' for more details.)
+- %confirm_limit% => hours a subscription must be confirmed before subscriber gets deleted from database
 
 'newsletter' with the following variables:
-%firstname%, %lastname%, %email% => same as above
-%edit_parameter% => the parameter for editing a subscription already in database (See '3. Parameters' for more details.)
-%unsubscribe_parameter% => the parameter for removing a subscription from database (See '3. Parameters' for more details.)
-%content_text% => all articles with title and summary relating to the current newsletter and generated absolute url as text
-%content_html% => articles HTML formatted and with clickable, translated "Read more" link
+- %firstname%, %lastname%, %email% => same as above
+- %edit_parameter% => the parameter for editing a subscription already in database (See '3. Parameters' for more details.)
+- %unsubscribe_parameter% => the parameter for removing a subscription from database (See '3. Parameters' for more details.)
+- %content_text% => all articles with title and summary relating to the current newsletter and generated absolute url as text
+- %content_html% => articles HTML formatted and with clickable, translated "Read more" link
 
 
 3. Parameters
@@ -80,9 +80,11 @@ feed:
 First you have to create a new newsletter and set a subject. You should use a name other than just 'Newsletter'
 so that you know inside of an article which newsletter your are choosing. So a better name would be
 'Newsletter from 01.01.2010'.
+
 Than you can either start directly adding a new article from within the newsletter's configuration form or
 if you have already an article which you like to integrate into the newsletter just go directly to that one
 and open it's edit form.
+
 Inside the edit form on the right side there is a dropdown box where you can select the newsletter.
 Than if you have all articles you want inside the newsletter go back to the newsletter list and click
 `Send` left of the newsletter subject. A page opens, showing you the title of the newsletter, the amount
